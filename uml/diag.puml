@@ -1,0 +1,60 @@
+@startuml AI Token Analyzer 
+
+class SimpleTokenizer {
+    +Parse(text: string): string[]
+}
+
+class ComplexTokenizer {
+    +Parse(text: string): string[]
+}
+
+interface ITokenizer {
+    +MakeTokenizer(tokenizer: tokenizer_t): tokenizer_t
+}
+
+class Tokenizer {
+    +MakeTokenizer(tokenizer: tokenizer_t): ITokenizer
+}
+
+class BulkTokenizer {
+    +ParseFile(path: string): string[]
+}
+
+class SimpleCostCalculator {
+    +cost(total: int): float
+}
+
+class ComplexCostCalculator {
+    +cost(total: int): float
+}
+
+interface ICostCalculator {
+    +MakeCostCalculatora(calculator: calculator_t): calculator_t
+}
+
+class CostCalculator {
+    +MakeCostCalculator(calculator: calculator_t): calculator_t
+}
+
+interface IBackend {
+    +PlanOutputTokens(requested: int): int
+}
+
+class Backend {
+    -Tokenmax: int
+    +PlanOutputToken(requested: optional<int>): int
+}
+
+' Relationship's
+' Tokenizer Relationships
+SimpleTokenizer --|> Tokenizer
+ComplexTokenizer --|> Tokenizer
+ITokenizer ..|> Tokenizer
+Tokenizer o--> BulkTokenizer
+' Cost Algo. Relationships
+SimpleCostCalculator --|> CostCalculator
+ComplexCostCalculator --|> CostCalculator
+ICostCalculator ..|> CostCalculator
+' Backend Relationships
+IBackend ..|> Backend
+@enduml
