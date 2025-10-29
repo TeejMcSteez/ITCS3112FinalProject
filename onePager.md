@@ -24,8 +24,8 @@ There will be a basic a CostCalculator, Tokenizer, and Backend. The backend is n
 3. IBackend
     - Determines the type of AI model on the backend which defines max-token length, compute-time-per-token, etc. 
 #### Design Patterns
-1. Strategies, depending on the tokenizer the user chooses to use in runtime it will use different tokenization strategies to output tokens
-2. Adapter Pattern, for more common currencies like the Euro and Yen add a basic adapter to properly calculate cost for different countries as all calculation initially will be in USD.
+1. Strategies, A tokenizer will implement algorithm's for splitting a string into an array of smaller string's or character's because of this different algorithms will be used to split strings in a different matter resulting in the need for different tokenization strategies.
+2. Adapter Pattern, for more common currencies like the Euro and Yen add a basic adapter to calculate cost for different countries as all calculation initially will be in USD.
 3. Singleton CTokenAnalyzer for the UI which integrates all classes and interfaces defined for operation.
 #### Key Requirements
 Functional:
