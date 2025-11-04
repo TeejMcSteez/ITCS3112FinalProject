@@ -55,9 +55,6 @@ ModelParams
 
 ## UI
 
-Question: is this a needed class? Does it need to be singleton or more extendable for future use?
-
-
 ### Responsibilities
 
 1. Class to interact with program
