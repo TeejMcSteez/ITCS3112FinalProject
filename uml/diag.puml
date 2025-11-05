@@ -17,7 +17,7 @@ class SimpleCostCalculator {
 }
 
 interface ICostCalculator {
-    +MakeCostCalculatora(calculator: calculator_t): calculator_t
+    +MakeCostCalculator(calculator: calculator_t): calculator_t
 }
 
 class CostCalculator {
