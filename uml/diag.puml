@@ -1,54 +1,56 @@
-@startuml AI Token Analyzer 
-
-class SimpleTokenizer {
-    +Parse(text: string): string[]
-}
+@startuml AITokenAnalyzer
 
 interface ITokenizer {
-    +MakeTokenizer(tokenizer: tokenizer_t): tokenizer_t
+    +OutputTokens(text: string): vector<string>
 }
 
 class Tokenizer {
-    +MakeTokenizer(tokenizer: tokenizer_t): ITokenizer
-}
-
-class SimpleCostCalculator {
-    +cost(total: int): float
+    +OutputTokens(text: string): vector<string>
 }
 
 interface ICostCalculator {
-    +MakeCostCalculator(calculator: calculator_t): calculator_t
+    +CalculateCost(total_tokens: int, mcl: int, tps: int): float
 }
 
 class CostCalculator {
-    +MakeCostCalculator(calculator: calculator_t): calculator_t
+    +CalculateCost(total_tokens: int, mcl: int, tps: int): float
+}
+
+interface IModelParams {
+    -MAX_CONTENT_LENGTH: int
+    -TOKENS_PER_SECOND: int
 }
 
 class ModelParams {
     -MAX_CONTENT_LENGTH: int
     -TOKENS_PER_SECOND: int
-    +PlanOutputToken(requested: optional<int>): int
 }
 
 class ConfigIO {
-    +load_config(path: string): ModelsParams[]
-    +load_models(path: string): string[]
+    +load_config(path: string): vector<ModelsParams>
+    +load_models(path: string): vector<string>
+}
+
+class UnitConverter {
+    +w_to_kwh(watts: float): float
+    +kwh_to_w(kwh: float): float
+    +convert_currency(conversion_func: void *, price: float): float
 }
 
 class Main {
-    -CostCalculator calc
-    -Tokenizer tb
-    -ConfigIO conf
+    - calc: CostCalculator
+    - tb: Tokenizer
+    - conf: ConfigIO
 }
 
 ' Relationship's
 ' Tokenizer Relationships
-SimpleTokenizer --|> Tokenizer
 ITokenizer ..|> Tokenizer
 ' Cost Algo. Relationships
-SimpleCostCalculator --|> CostCalculator
 ICostCalculator ..|> CostCalculator
+CostCalculator --> UnitConverter
 ' Model/Config Relationships
+IModelParams ..|> ModelParams
 ConfigIO --> ModelParams
 ' Main relationships
 CostCalculator --> Main
