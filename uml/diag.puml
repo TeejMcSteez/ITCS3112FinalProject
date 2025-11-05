@@ -45,15 +45,15 @@ class Main {
 
 ' Relationship's
 ' Tokenizer Relationships
-ITokenizer ..|> Tokenizer
+ITokenizer "1" ..|> "many" Tokenizer
 ' Cost Algo. Relationships
-ICostCalculator ..|> CostCalculator
-CostCalculator --> UnitConverter
+ICostCalculator "1" ..|> "many" CostCalculator
+CostCalculator ..> UnitConverter
 ' Model/Config Relationships
-IModelParams ..|> ModelParams
-ConfigIO --> ModelParams
+IModelParams "1" ..|> "many" ModelParams
+ConfigIO "1" --> "many" ModelParams
 ' Main relationships
-CostCalculator --> Main
-Tokenizer --> Main
-ConfigIO --> Main
+CostCalculator "many" --> "1" Main
+Tokenizer "many" --> "1" Main
+ConfigIO "1" --> "1" Main
 @enduml
