@@ -9,26 +9,34 @@ class Tokenizer {
 }
 
 interface ICostCalculator {
-    +CalculateCost(total_tokens: int, mcl: int, tps: int): float
+    +CalculateCost(total_tokens: int, mp: ModelParams): float
 }
 
 class CostCalculator {
-    +CalculateCost(total_tokens: int, mcl: int, tps: int): float
+    +CalculateCost(total_tokens: int, mp: ModelParams): float
 }
 
 interface IModelParams {
+    -NAME: string
     -MAX_CONTENT_LENGTH: int
     -TOKENS_PER_SECOND: int
 }
 
 class ModelParams {
+    -NAME: string
     -MAX_CONTENT_LENGTH: int
     -TOKENS_PER_SECOND: int
 }
 
+class FileIO {
+    +load_config(path: string): vector<string>
+    +update_config(name: string, mcl: int, tps: int): void
+}
+
 class ConfigIO {
-    +load_config(path: string): vector<ModelsParams>
-    +load_models(path: string): vector<string>
+    -fio: FileIO
+    +load_models(path: string): vector<ModelsParams>
+    +update_models(mode: ModelParams): void
 }
 
 class UnitConverter {
@@ -52,6 +60,7 @@ CostCalculator ..> UnitConverter
 ' Model/Config Relationships
 IModelParams "1" ..|> "many" ModelParams
 ConfigIO "1" --> "many" ModelParams
+FileIO "1" --> "1" ConfigIO
 ' Main relationships
 CostCalculator "many" --> "1" Main
 Tokenizer "many" --> "1" Main
