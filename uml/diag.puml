@@ -4,10 +4,6 @@ class SimpleTokenizer {
     +Parse(text: string): string[]
 }
 
-class ComplexTokenizer {
-    +Parse(text: string): string[]
-}
-
 interface ITokenizer {
     +MakeTokenizer(tokenizer: tokenizer_t): tokenizer_t
 }
@@ -16,15 +12,7 @@ class Tokenizer {
     +MakeTokenizer(tokenizer: tokenizer_t): ITokenizer
 }
 
-class BulkTokenizer {
-    +ParseFile(path: string): string[]
-}
-
 class SimpleCostCalculator {
-    +cost(total: int): float
-}
-
-class ComplexCostCalculator {
     +cost(total: int): float
 }
 
@@ -36,25 +24,34 @@ class CostCalculator {
     +MakeCostCalculator(calculator: calculator_t): calculator_t
 }
 
-interface IBackend {
-    +PlanOutputTokens(requested: int): int
+class ModelParams {
+    -MAX_CONTENT_LENGTH: int
+    -TOKENS_PER_SECOND: int
+    +PlanOutputToken(requested: optional<int>): int
 }
 
-class Backend {
-    -Tokenmax: int
-    +PlanOutputToken(requested: optional<int>): int
+class ConfigIO {
+    +load_config(path: string): ModelsParams[]
+    +load_models(path: string): string[]
+}
+
+class Main {
+    -CostCalculator calc
+    -Tokenizer tb
+    -ConfigIO conf
 }
 
 ' Relationship's
 ' Tokenizer Relationships
 SimpleTokenizer --|> Tokenizer
-ComplexTokenizer --|> Tokenizer
 ITokenizer ..|> Tokenizer
-Tokenizer o--> BulkTokenizer
 ' Cost Algo. Relationships
 SimpleCostCalculator --|> CostCalculator
-ComplexCostCalculator --|> CostCalculator
 ICostCalculator ..|> CostCalculator
-' Backend Relationships
-IBackend ..|> Backend
+' Model/Config Relationships
+ConfigIO --> ModelParams
+' Main relationships
+CostCalculator --> Main
+Tokenizer --> Main
+ConfigIO --> Main
 @enduml
