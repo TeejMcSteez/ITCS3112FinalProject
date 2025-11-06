@@ -17,15 +17,17 @@ class CostCalculator {
 }
 
 interface IModelParams {
-    -NAME: string
-    -MAX_CONTENT_LENGTH: int
-    -TOKENS_PER_SECOND: int
+    +NAME: string
+    +MAX_CONTENT_LENGTH: int
+    +TOKENS_PER_SECOND: int
+    +plan_output_tokens(optional<string>)
 }
 
 class ModelParams {
-    -NAME: string
-    -MAX_CONTENT_LENGTH: int
-    -TOKENS_PER_SECOND: int
+    +NAME: string
+    +MAX_CONTENT_LENGTH: int
+    +TOKENS_PER_SECOND: int
+    +plan_output_tokens(optional<string>)
 }
 
 class FileIO {
@@ -37,6 +39,7 @@ class ConfigIO {
     -fio: FileIO
     +load_models(path: string): vector<ModelsParams>
     +update_models(mode: ModelParams): void
+    +get_model(nameL string): ModelParams
 }
 
 class UnitConverter {
