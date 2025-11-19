@@ -1,0 +1,3 @@
+name,max_context_length,tokens_per_second,system_power_draw,electricity_cost_per_kwh
+basic,24000,12,1000,0.13
+complex,24000,2,750,0.09
