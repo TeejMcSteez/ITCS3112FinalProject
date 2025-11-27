@@ -1,9 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "Enabled",
-    "files.associations": {
-        "*.cpp": "cpp",
-        "*.yaml": "yaml",
-        "xlocale": "cpp",
-        "xstring": "cpp"
-    }
-}

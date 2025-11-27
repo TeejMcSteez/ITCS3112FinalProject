@@ -1,5 +1,5 @@
-#include "../classes/ModelParams.h"
+#include "IModelParams.h"
 
 class ICostCalculator {
-    float Calculate(int numberOfTokens, ModelParams mdls);
+  float Calculate(int numberOfTokens, IModelParams mdls);
 };
