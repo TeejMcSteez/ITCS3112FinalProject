@@ -1,3 +1,11 @@
 Write-Host "Building for C++17 in dist"
 
-clang src/main.cpp -o dist/out --std="c++23"
+if (!(Test-Path -Path ./dist)) {
+  New-Item -Path ./dist -ItemType Directory  
+}
+
+Set-Location ./dist/
+
+clang ../src/main.cpp --std="c++17"
+
+Set-Location ../
