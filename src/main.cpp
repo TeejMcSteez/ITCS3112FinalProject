@@ -1,5 +1,6 @@
 #include "./classes/ConfigIO.cpp"
 #include "./classes/CostCalculator.cpp"
+#include "./classes/FileReader.cpp"
 #include "./classes/Tokenizers.cpp"
 #include <cstring>
 #include <iostream>
@@ -49,13 +50,30 @@ int main() {
       std::cout << i + 1 << ": " << calc.models[i].MODEL_NAME << std::endl;
     }
     int modelChoice = readBoundedInt(0, calc.models.size());
-    std::string input;
-    std::cout << "Please enter a string you wish to tokenzie and calculate"
+
+    std::string in;
+    std::cout << "1. Enter a filename to convert to string\n2. Enter string"
               << std::endl;
-    std::string in = "";
-    while (in == "") {
-      std::getline(std::cin, in);
+    std::cin >> in;
+
+    if (in == "1") {
+      std::cout << "Please enter the path of the file" << std::endl;
+      std::string path;
+      std::cin >> path;
+      in = ReadFile(path);
+    } else if (in == "2") {
+      std::string input;
+      std::cout << "Please enter a string you wish to tokenzie and calculate"
+                << std::endl;
+      std::string in2 = "";
+      while (in2 == "") {
+        std::getline(std::cin, in2);
+      }
+    } else {
+      std::cout << "Invalid input exiting" << std::endl;
+      return 0;
     }
+
     const TokenBuffer tokenString = TokenBuffer(in);
     Buffer tokens = st.Tokenize(tokenString);
     float cost =
