@@ -91,7 +91,7 @@ int main() {
       return 0;
     }
     std::cout << "Calculating cost . . .\n" << std::endl;
-    float cost =
+    double cost =
         calc.Calculate(tokens.input.size(), calc.models[modelChoice - 1]);
     std::cout << "Current cost: " << cost << std::endl;
     char exit;

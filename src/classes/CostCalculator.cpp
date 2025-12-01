@@ -36,7 +36,7 @@ public:
     float cost = energyKWh * model.KWH_COST;
     return cost;
   }
-  float RealisticCalculate(int numberOfTokens, ModelParams model) {
+  double RealisticCalculate(int numberOfTokens, ModelParams model) {
     std::cout << model.MODEL_NAME << std::endl;
     std::cout << "NOT: " << numberOfTokens << std::endl;
 
@@ -50,7 +50,7 @@ public:
     float energyKWh = energyWh / 1000;
 
     std::cout << "Energy (KWh): " << energyKWh << std::endl;
-    float cost = energyKWh * model.KWH_COST;
+    double cost = energyKWh * model.KWH_COST;
     return cost;
   }
 };

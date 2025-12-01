@@ -38,7 +38,7 @@ std::vector<ModelParams> load_models_csv(const std::string &path) {
       throw std::runtime_error("Invalid config file");
     ModelParams m =
         ModelParams(cells[0], std::stoi(cells[1]), std::stoi(cells[2]),
-                    std::stoi(cells[3]), std::stoi(cells[4]));
+                    std::stoi(cells[3]), std::stof(cells[4]));
     rows.push_back(std::move(m));
   }
   return rows;
