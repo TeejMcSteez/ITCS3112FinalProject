@@ -105,10 +105,20 @@ public:
   Buffer Tokenize(const TokenBuffer &tb) {
     Buffer out;
     const std::string_view s = tb.input;
+    // breaks s into chars to search for byte pairs
     for (char c : s) {
       out.input.push_back(std::string(1, c));
     }
-
+    // Foreach individual byte
+    for (int i = 0; i < out.input.size() - 1; i++) {
+      // if this byte + next byte contains a key in key map
+      if (vocab.find(out.input[i] + out.input[i + 1]) != vocab.end()) {
+        // Add merged bytes to end of out
+        out.input.push_back(std::string(out.input[i] + out.input[i + 1]));
+        // erase individual bytes in out
+        out.input.erase(out.input.begin() + i, out.input.begin() + i + 1);
+      }
+    }
     return out;
   }
 };
