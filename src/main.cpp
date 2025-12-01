@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+BPETokenizer bt = BPETokenizer();
 SpaceTokenizer st = SpaceTokenizer();
 CostCalculator calc = CostCalculator();
 
@@ -75,7 +76,23 @@ int main() {
     }
 
     const TokenBuffer tokenString = TokenBuffer(in);
-    Buffer tokens = st.Tokenize(tokenString);
+    std::string in3;
+    std::cout << "Choose tokenization algorithm\n1. Space tokenizer\n2. "
+                 "Byte-Pair Tokenizer"
+              << std::endl;
+    std::cin >> in3;
+    Buffer tokens;
+    if (in3 == "1") {
+      std::cout << "Using space-wise tokenizer" << std::endl;
+      tokens = st.Tokenize(tokenString);
+    } else if (in3 == "2") {
+      std::cout << "Using byte-pair encoding tokenizer" << std::endl;
+      tokens = bt.Tokenize(tokenString);
+    } else {
+      std::cout << "Invalid input exiting" << std::endl;
+      return 0;
+    }
+    std::cout << "Calculating cost . . .\n" << std::endl;
     float cost =
         calc.Calculate(tokens.input.size(), calc.models[modelChoice - 1]);
     std::cout << "Current cost: " << cost << std::endl;

@@ -51,5 +51,6 @@ public:
 
     std::cout << "Energy (KWh): " << energyKWh << std::endl;
     float cost = energyKWh * model.KWH_COST;
+    return cost;
   }
 };

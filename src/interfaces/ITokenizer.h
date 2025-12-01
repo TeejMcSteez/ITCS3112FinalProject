@@ -1,5 +1,6 @@
 #include "../types.h"
 
-class ITokenizer {
-    virtual Buffer Tokenize(const TokenBuffer& tb);
+struct ITokenizer {
+  virtual ~ITokenizer() = default;
+  virtual Buffer Tokenize(const TokenBuffer &tb) = 0;
 };
