@@ -23,7 +23,7 @@ This is so multi-line iput can be accepted without the edge cases of console inp
 
 Compiled with Clang Version 19.1.4 for x86_64-unknown-windows-msvc
 
-clang main.cpp --std=c++17
+Build with `clang main.cpp --std=c++17`
 
 Must be compiled with c++17 or greater for compatibility with string_view and more.
 
@@ -31,4 +31,4 @@ Must be compiled with c++17 or greater for compatibility with string_view and mo
 
 Build will produce an executable which can be ran
 
-All input will happen from the console asking the user whether or not they would like to user certain options
+All input will happen from the console asking the user whether or not they would like to use certain options
