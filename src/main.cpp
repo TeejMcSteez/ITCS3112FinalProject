@@ -8,10 +8,6 @@
 #include <string>
 #include <vector>
 
-BPETokenizer bt = BPETokenizer();
-SpaceTokenizer st = SpaceTokenizer();
-CostCalculator calc = CostCalculator();
-
 /**
  * Upper inclusive - lower exclusive
  *
@@ -37,7 +33,7 @@ int readBoundedInt(int lower, int upper) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
 }
-
+// TODO: Refactor main variable names it is getting ugly
 int main() {
 
   std::cout << "Please enter config file\n" << std::endl;
@@ -45,48 +41,50 @@ int main() {
   std::cin >> configFile;
 
   while (true) {
-    calc = CostCalculator(load_config(configFile.c_str()));
+    CostCalculator calc = CostCalculator(load_config(configFile.c_str()));
     std::cout << "Please choose a model" << std::endl;
     for (int i = 0; i < calc.models.size(); i++) {
       std::cout << i + 1 << ": " << calc.models[i].MODEL_NAME << std::endl;
     }
     int modelChoice = readBoundedInt(0, calc.models.size());
 
-    std::string in;
+    std::string inputChoice;
     std::cout << "1. Enter a filename to convert to string\n2. Enter string"
               << std::endl;
-    std::cin >> in;
-
-    if (in == "1") {
+    std::cin >> inputChoice;
+    std::string tokenParam;
+    if (inputChoice == "1") {
       std::cout << "Please enter the path of the file" << std::endl;
       std::string path;
       std::cin >> path;
-      in = ReadFile(path);
-    } else if (in == "2") {
-      std::string input;
+      tokenParam = ReadFile(path);
+    } else if (inputChoice == "2") {
       std::cout << "Please enter a string you wish to tokenzie and calculate"
                 << std::endl;
       std::string in2 = "";
       while (in2 == "") {
         std::getline(std::cin, in2);
       }
+      tokenParam = in2;
     } else {
       std::cout << "Invalid input exiting" << std::endl;
       return 0;
     }
 
-    const TokenBuffer tokenString = TokenBuffer(in);
-    std::string in3;
+    const TokenBuffer tokenString = TokenBuffer(tokenParam);
+    std::string algoChoice;
     std::cout << "Choose tokenization algorithm\n1. Space tokenizer\n2. "
                  "Byte-Pair Tokenizer"
               << std::endl;
-    std::cin >> in3;
+    std::cin >> algoChoice;
     Buffer tokens;
-    if (in3 == "1") {
+    if (algoChoice == "1") {
       std::cout << "Using space-wise tokenizer" << std::endl;
+      SpaceTokenizer st = SpaceTokenizer();
       tokens = st.Tokenize(tokenString);
-    } else if (in3 == "2") {
+    } else if (algoChoice == "2") {
       std::cout << "Using byte-pair encoding tokenizer" << std::endl;
+      BPETokenizer bt = BPETokenizer();
       tokens = bt.Tokenize(tokenString);
     } else {
       std::cout << "Invalid input exiting" << std::endl;
