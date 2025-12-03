@@ -33,7 +33,7 @@ int readBoundedInt(int lower, int upper) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
 }
-// TODO: Refactor main variable names it is getting ugly
+
 int main() {
 
   std::cout << "Please enter config file\n" << std::endl;
