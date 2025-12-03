@@ -46,5 +46,8 @@ std::vector<ModelParams> load_models_csv(const std::string &path) {
 
 std::vector<ModelParams> load_config(const char *path) {
   std::vector<ModelParams> models = load_models_csv(path);
+  if (models.size() == 0) {
+    std::cerr << "No models loaded from config" << std::endl;
+  }
   return models;
 }
