@@ -32,3 +32,8 @@
 
 1. Configuration operations need to be better, allowing for extension of the confiuration by the user
 2. Fix BPE Tokenizer, does not add matched byte pairs and remove old byte pairs accurately
+
+## TODO:
+
+1. Add Enums for tokenizer types and Calculator Types
+2. Add energy cost decorator pattern, being able to handle base power cost and then actual compute cost in two different classes will be nice rather than doing everything in calculate 
