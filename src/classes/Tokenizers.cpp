@@ -3,7 +3,6 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <string>
 
 class SpaceTokenizer : ITokenizer {
 private:
@@ -111,7 +110,7 @@ public:
       out.input.push_back(std::string(1, c));
     }
     for (int i = 0; i + 1 < out.input.size();) {
-      std::string key = out.input[i] + out.input[i+1];
+      std::string key = out.input[i] + out.input[i + 1];
       if (auto it = vocab.find(key); it != vocab.end()) {
         out.input.erase(out.input.begin() + i, out.input.begin() + i + 2);
         out.input.push_back(key);

@@ -1,9 +1,9 @@
 #include "ModelParams.h"
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <iostream>
 
 /* TODO: There is a bug such that if there are improper amount of lines the
    program will crash with no output This needs to be fixed
