@@ -37,3 +37,4 @@
 
 1. Add Enums for tokenizer types and Calculator Types
 2. Add energy cost decorator pattern, being able to handle base power cost and then actual compute cost in two different classes will be nice rather than doing everything in calculate 
+3. Add Custom config for different user input (allowing more than one user)
