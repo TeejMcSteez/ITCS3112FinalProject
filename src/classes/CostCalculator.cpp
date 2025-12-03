@@ -23,7 +23,7 @@ public:
   CostCalculator(std::vector<ModelParams> mdls) { models = mdls; }
   float Calculate(int numberOfTokens, ModelParams model) {
     std::cout << "NOT: " << numberOfTokens << std::endl;
-    std::cout << model.MODEL_NAME << std::endl;
+    std::cout << "Model Params: " << model.MODEL_NAME << std::endl;
     std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
     float seconds = numberOfTokens / model.TOKENS_PER_SECOND;
     float hours = seconds / 3600;
@@ -37,7 +37,7 @@ public:
     return cost;
   }
   double RealisticCalculate(int numberOfTokens, ModelParams model) {
-    std::cout << model.MODEL_NAME << std::endl;
+    std::cout << "Model parameters in use: " << model.MODEL_NAME << std::endl;
     std::cout << "NOT: " << numberOfTokens << std::endl;
 
     std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
