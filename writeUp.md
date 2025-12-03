@@ -2,15 +2,15 @@
 
 ### Interfaces
 
-1. ICostCalculator.h
-2. IModelParams.h
-3. ITokenizer.h
+1. ICostCalculator.h/CostCalculator
+2. IModelParams.h/ModelParams.h
+3. ITokenizer.h/Tokenizers.cpp
 
 ### Data Structures
 
 1. Struct TokenBuffer & Buffer in types.h
-2. Enum -> Map in Byte-pair token algorithm for byte-pairs
-3. Data Structure -> Vectors (ex: std::vector<std::string> input in Buffer)
+2. Data Structure -> Vectors (ex: std::vector<std::string> input in Buffer)
+3. N/a
 
 ### Polymorphism
 
@@ -19,10 +19,14 @@
 
 ### Inheritance
 
+1. Realistic Calculator inerhits ICalculator calculate method
+2. BPE & SpaceTokenizer ineherit tokenize from ITokenizer with a different token generation algorithm's
+
 ### Design Patterns
 
-1. main.cpp Factory - Depending on input will produce classes
-2. Token Algorithm strategies, allowing different classes to implement their own token algorithm inheriting from ITokenizer with the base Tokenize method
+1. main.cpp Factory - Depending on input will produce classes to produce desired ouput
+2. Token Algorithm strategies & different calculators, allowing different classes to implement their own token algorithm inheriting from ITokenizer with the base Tokenize method and different calcualtors all having the base method returning the same type with slightly different calculations.
+3. N/a
 
 ### Review
 
