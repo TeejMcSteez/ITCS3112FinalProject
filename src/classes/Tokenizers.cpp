@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <string>
 
 class SpaceTokenizer : ITokenizer {
 private:
@@ -109,14 +110,13 @@ public:
     for (char c : s) {
       out.input.push_back(std::string(1, c));
     }
-    // Foreach individual byte
-    for (int i = 0; i < out.input.size() - 1; i++) {
-      // if this byte + next byte contains a key in key map
-      if (vocab.find(out.input[i] + out.input[i + 1]) != vocab.end()) {
-        // Add merged bytes to end of out
-        out.input.push_back(std::string(out.input[i] + out.input[i + 1]));
-        // erase individual bytes in out
-        out.input.erase(out.input.begin() + i, out.input.begin() + i + 1);
+    for (int i = 0; i + 1 < out.input.size();) {
+      std::string key = out.input[i] + out.input[i+1];
+      if (auto it = vocab.find(key); it != vocab.end()) {
+        out.input.erase(out.input.begin() + i, out.input.begin() + i + 2);
+        out.input.push_back(key);
+      } else {
+        i++;
       }
     }
     return out;
