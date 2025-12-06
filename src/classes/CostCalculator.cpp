@@ -27,7 +27,7 @@ class CostCalculator : ICostCalculator {
     std::cout << "NOT: " << numberOfTokens << std::endl;
     std::cout << "Model Params: " << model.MODEL_NAME << std::endl;
     std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
-    double seconds = static_cast<int>(numberOfTokens) / model.TOKENS_PER_SECOND;
+    double seconds = static_cast<double>(numberOfTokens) / static_cast<double>(model.TOKENS_PER_SECOND);
     double hours = seconds / 3600;
     std::cout << "Hours: " << hours << std::endl;
 
