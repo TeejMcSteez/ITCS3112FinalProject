@@ -1,5 +1,3 @@
-#include <iostream>
-
 class OutputDecorator {
 public:
     OutputDecorator() = default;
