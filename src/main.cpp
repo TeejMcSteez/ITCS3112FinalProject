@@ -41,6 +41,15 @@ int main() {
   std::string configFile;
   std::cin >> configFile;
 
+  std::cout << "Would you like to edit the configuration? (y/n)" << std::endl;
+  std::string configEdit = "";
+  while (configEdit == "") {
+    std::cin >> configEdit;
+  }
+  if (configEdit[0] == 'y') {
+    edit_config(configFile.c_str());
+  }
+
   while (true) {
     CostCalculator calc = CostCalculator(load_config(configFile.c_str()));
     std::cout << "Please choose a model" << std::endl;
