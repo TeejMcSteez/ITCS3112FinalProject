@@ -1,0 +1,6 @@
+# Source - https://stackoverflow.com/a
+# Posted by Aaron Liu, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-12-06, License - CC BY-SA 4.0
+
+CompileFlags:
+  Add: [-std=c++17]
