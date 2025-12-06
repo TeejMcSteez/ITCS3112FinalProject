@@ -23,11 +23,11 @@ class CostCalculator : ICostCalculator {
   std::vector<ModelParams> models;
   CostCalculator() = default;
   CostCalculator(std::vector<ModelParams> mdls) { models = mdls; }
-  double Calculate(int numberOfTokens, ModelParams model) {
+  double Calculate(std::size_t numberOfTokens, ModelParams model) {
     std::cout << "NOT: " << numberOfTokens << std::endl;
     std::cout << "Model Params: " << model.MODEL_NAME << std::endl;
     std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
-    double seconds = numberOfTokens / model.TOKENS_PER_SECOND;
+    double seconds = static_cast<int>(numberOfTokens) / model.TOKENS_PER_SECOND;
     double hours = seconds / 3600;
     std::cout << "Hours: " << hours << std::endl;
 

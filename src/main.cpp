@@ -15,8 +15,8 @@
  * This is to ensure array operations with 0-based indexing work properly with
  * input.
  */
-int readBoundedInt(int lower, int upper) {
-  int value;
+std::size_t readBoundedInt(std::size_t lower, std::size_t upper) {
+  std::size_t value;
 
   while (true) {
     std::cout << "Enter an integer: ";
@@ -44,10 +44,10 @@ int main() {
   while (true) {
     CostCalculator calc = CostCalculator(load_config(configFile.c_str()));
     std::cout << "Please choose a model" << std::endl;
-    for (size_t i = 0; i < calc.models.size(); i++) {
+    for (std::size_t i = 0; i < calc.models.size(); i++) {
       std::cout << i + 1 << ": " << calc.models[i].MODEL_NAME << std::endl;
     }
-    int modelChoice = readBoundedInt(0, calc.models.size());
+    std::size_t modelChoice = readBoundedInt(0, calc.models.size());
 
     std::string inputChoice;
     std::cout << "1. Enter a filename to convert to string\n2. Enter string"
