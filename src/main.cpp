@@ -43,7 +43,7 @@ int main() {
   while (true) {
     CostCalculator calc = CostCalculator(load_config(configFile.c_str()));
     std::cout << "Please choose a model" << std::endl;
-    for (int i = 0; i < calc.models.size(); i++) {
+    for (size_t i = 0; i < calc.models.size(); i++) {
       std::cout << i + 1 << ": " << calc.models[i].MODEL_NAME << std::endl;
     }
     int modelChoice = readBoundedInt(0, calc.models.size());

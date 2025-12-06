@@ -1,4 +1,5 @@
 #include "../interfaces/ICostCalculator.h"
+#include "./EnergyDecorator.cpp"
 
 #include "ModelParams.h"
 #include <iostream>
@@ -17,37 +18,21 @@ Hours = (tokensPerSecond / number of tokens) / 3600
 */
 
 class CostCalculator : ICostCalculator {
-public:
+  OutputDecorator dec = OutputDecorator();
+  public:
   std::vector<ModelParams> models;
   CostCalculator() = default;
   CostCalculator(std::vector<ModelParams> mdls) { models = mdls; }
-  float Calculate(int numberOfTokens, ModelParams model) {
+  double Calculate(int numberOfTokens, ModelParams model) {
     std::cout << "NOT: " << numberOfTokens << std::endl;
     std::cout << "Model Params: " << model.MODEL_NAME << std::endl;
     std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
-    float seconds = numberOfTokens / model.TOKENS_PER_SECOND;
-    float hours = seconds / 3600;
+    double seconds = numberOfTokens / model.TOKENS_PER_SECOND;
+    double hours = seconds / 3600;
     std::cout << "Hours: " << hours << std::endl;
 
-    float energyWh = model.SYSTEM_POWER_DRAW * hours;
-    float energyKWh = energyWh / 1000;
-
-    std::cout << "Energy (KWh): " << energyKWh << std::endl;
-    float cost = energyKWh * model.KWH_COST;
-    return cost;
-  }
-  double RealisticCalculate(int numberOfTokens, ModelParams model) {
-    std::cout << "Model parameters in use: " << model.MODEL_NAME << std::endl;
-    std::cout << "NOT: " << numberOfTokens << std::endl;
-
-    std::cout << "TPS: " << model.TOKENS_PER_SECOND << std::endl;
-
-    float seconds = numberOfTokens / model.TOKENS_PER_SECOND;
-    float hours = seconds / 3600;
-    std::cout << "Hours: " << hours << std::endl;
-
-    float energyWh = model.SYSTEM_POWER_DRAW * hours;
-    float energyKWh = energyWh / 1000;
+    double energyWh = model.SYSTEM_POWER_DRAW * hours;
+    double energyKWh = dec.WhToKwh(energyWh);
 
     std::cout << "Energy (KWh): " << energyKWh << std::endl;
     double cost = energyKWh * model.KWH_COST;

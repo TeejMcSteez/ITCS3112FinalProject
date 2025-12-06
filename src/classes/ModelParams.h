@@ -9,7 +9,7 @@ public:
   int MAX_CONTEXT_LENGTH;
   int TOKENS_PER_SECOND;
   int SYSTEM_POWER_DRAW;
-  float KWH_COST;
+  double KWH_COST;
   ModelParams() {
     MODEL_NAME = "";
     MAX_CONTEXT_LENGTH = 15000;
@@ -18,7 +18,7 @@ public:
     KWH_COST = 0.13;
   }
   ModelParams(std::string mdlName, int mcl, int tps, int systemPowerDraw,
-              float kwhCost) {
+              double kwhCost) {
     MODEL_NAME = mdlName;
     MAX_CONTEXT_LENGTH = mcl;
     TOKENS_PER_SECOND = tps;
