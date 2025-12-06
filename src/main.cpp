@@ -7,6 +7,7 @@
 #include <limits> // for std::numeric_limits
 #include <string>
 #include <vector>
+#include "types.h"
 
 /**
  * Upper inclusive - lower exclusive
@@ -78,11 +79,12 @@ int main() {
               << std::endl;
     std::cin >> algoChoice;
     Buffer tokens;
-    if (algoChoice == "1") {
+    int algo = stoi(algoChoice);
+    if (algo == static_cast<int>(Token_Algorithms::SPACE_WISE)) {
       std::cout << "Using space-wise tokenizer" << std::endl;
       SpaceTokenizer st = SpaceTokenizer();
       tokens = st.Tokenize(tokenString);
-    } else if (algoChoice == "2") {
+    } else if (algo == static_cast<int>(Token_Algorithms::BYTE_PAIR)) {
       std::cout << "Using byte-pair encoding tokenizer" << std::endl;
       BPETokenizer bt = BPETokenizer();
       tokens = bt.Tokenize(tokenString);
