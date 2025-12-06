@@ -5,10 +5,6 @@
 #include <string>
 #include <vector>
 
-/* TODO: There is a bug such that if there are improper amount of lines the
-   program will crash with no output This needs to be fixed
-*/
-
 std::vector<std::string> split_commas(const std::string &line) {
   std::vector<std::string> out;
 
@@ -22,9 +18,10 @@ std::vector<std::string> split_commas(const std::string &line) {
 
 std::vector<ModelParams> load_models_csv(const std::string &path) {
   std::ifstream in(path);
-  if (!in)
+  if (!in) {
+    std::cout << "Invalid filename please re-run the program and use the correct file name" << std::endl;
     throw std::runtime_error("Open failed: " + path);
-
+  }
   std::vector<ModelParams> rows;
   std::string line;
 
