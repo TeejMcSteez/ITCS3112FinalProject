@@ -59,23 +59,23 @@ Ex: interface/implementation
 
 ### Data Structures
 
-1. Struct TokenBuffer & Buffer -> types.h
-2. Data Structure -> Vectors (ex: <std::vector><<std::string>> input in Buffer)
-3. Enumerations for different types of tokenizers make choice output easier with pre-defined types -> types.h
+1. Struct TokenBuffer & Buffer -> `types.h`
+2. Data Structure -> Vectors (ex: <std::vector><<std::string>> input in Buffer) used in many different programs -> `ConfigIO.cpp`, `CostCalculator.cpp`, etc.
+3. Enumerations for different types of tokenizers make choice output easier with pre-defined types -> `types.h`
 
 ### Polymorphism
 
-1. Model Params Inherits all of its parameters from IModelParams and overrides with a new constructor -> ModelParams.h
+1. Model Params Inherits all of its parameters from IModelParams and overrides with a new constructor -> `ModelParams.h`
     - All of model parameters local parameters are public making it so that Main can display information about models on the frontend and calculator can use their values on the backend.
-2. Cost Calculator inerhits its base CostCalculator from ICostCalculator and implements a new calculator algorithm -> CostCalculator.cpp
+2. Cost Calculator inheritsinherits its base CostCalculator from ICostCalculator and implements a new calculator algorithm -> `CostCalculator.cpp`
 
 ### Inheritance
 
-1. Cost Calculator inerhits ICalculator calculate method -> CostCalculator.cpp
-2. BPE & SpaceTokenizer ineherit tokenize from ITokenizer with a different token generation algorithm's -> Tokenizers.cpp
+1. Cost Calculator inherits ICalculator calculate method -> `CostCalculator.cpp`
+2. BPE & SpaceTokenizer ineherit tokenize from ITokenizer with a different token generation algorithm's -> `Tokenizers.cpp`
 
 ## Design Patterns
 
-1. Factory - Depending on input will produce classes to produce desired ouput -> main.cpp
-2. Strategy - Token Algorithm strategies & different calculators, allowing different classes to implement their own token algorithm inheriting from ITokenizer with the base Tokenize method and different calcualtors all having the base method returning the same type with slightly different calculations. -> Tokenizers.cpp
-3. Decorator Pattern for the energy conversions -> EnergyDecorator.cpp
+1. Factory - Depending on input will produce classes to produce desired ouput -> `main.cpp`
+2. Strategy - Token Algorithm strategies & different calculators, allowing different classes to implement their own token algorithm inheriting from ITokenizer with the base Tokenize method and different calcualtors all having the base method returning the same type with slightly different calculations. -> `Tokenizers.cpp`
+3. Decorator Pattern for the energy conversions -> `EnergyDecorator.cpp`
