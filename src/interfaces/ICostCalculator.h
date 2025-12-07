@@ -1,5 +1,5 @@
 #include "IModelParams.h"
 
 class ICostCalculator {
-  float Calculate(int numberOfTokens, IModelParams mdls);
+  float Calculate(std::size_t numberOfTokens, IModelParams mdls);
 };

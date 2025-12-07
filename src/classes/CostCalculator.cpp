@@ -13,8 +13,6 @@ If your hardware setup has a total of 1000W and you run the LLM for 8 hours:
 Watt-hours by 1000: \(8000Wh\div 1000=8kWh\).
 
 Hours = (tokensPerSecond / number of tokens) / 3600
-
-
 */
 
 class CostCalculator : ICostCalculator {
@@ -35,6 +33,7 @@ class CostCalculator : ICostCalculator {
     double energyKWh = dec.WhToKwh(energyWh);
 
     std::cout << "Energy (KWh): " << energyKWh << std::endl;
+    std::cout << "Normalized Power (Watts): " << dec.NormalizePower(energyKWh) << std::endl;
     double cost = energyKWh * model.KWH_COST;
     return cost;
   }
