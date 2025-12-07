@@ -1,26 +1,25 @@
 @startuml AITokenAnalyzer
 
 interface ITokenizer {
-    +OutputTokens(text: string): vector<string>
+    +Tokenize(text: string): vector<string>
 }
 
 class Tokenizer {
-    +OutputTokens(text: string): vector<string>
+    +Tokenize(text: string): vector<string>
 }
 
 interface ICostCalculator {
-    +CalculateCost(total_tokens: int, mp: ModelParams): float
+    +Calculate(total_tokens: int, mp: ModelParams): float
 }
 
 class CostCalculator {
-    +CalculateCost(total_tokens: int, mp: ModelParams): float
+    +Calculate(total_tokens: int, mp: ModelParams): float
 }
 
 interface IModelParams {
     +NAME: string
     +MAX_CONTENT_LENGTH: int
     +TOKENS_PER_SECOND: int
-    +plan_output_tokens(optional<string>)
 }
 
 class ModelParams {
@@ -30,22 +29,21 @@ class ModelParams {
     +plan_output_tokens(optional<string>)
 }
 
-class FileIO {
-    +load_config(path: string): vector<string>
-    +update_config(name: string, mcl: int, tps: int): void
+class FileReader {
+    +ReadFile(path:string)
 }
 
 class ConfigIO {
-    -fio: FileIO
     +load_models(path: string): vector<ModelsParams>
     +update_models(mode: ModelParams): void
-    +get_model(nameL string): ModelParams
+    +load_csv(path: string): vector<ModelsParams>
+    +edit_config(path: string): void
 }
 
-class UnitConverter {
+class EnergyDecorator {
     +w_to_kwh(watts: float): float
     +kwh_to_w(kwh: float): float
-    +convert_currency(conversion_func: void *, price: float): float
+    +Normalize(conversion_func: void *, price: float): float
 }
 
 class Main {
@@ -59,13 +57,13 @@ class Main {
 ITokenizer "1" ..|> "many" Tokenizer
 ' Cost Algo. Relationships
 ICostCalculator "1" ..|> "many" CostCalculator
-CostCalculator ..> UnitConverter
+CostCalculator ..> EnergyDecorator
 ' Model/Config Relationships
 IModelParams "1" ..|> "many" ModelParams
 ConfigIO "1" --> "many" ModelParams
-FileIO "1" --> "1" ConfigIO
 ' Main relationships
 CostCalculator "many" --> "1" Main
 Tokenizer "many" --> "1" Main
 ConfigIO "1" --> "1" Main
+FileReader "1" --> "1" Main
 @enduml
